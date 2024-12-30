@@ -6,13 +6,16 @@
 
 <p align="center">
   <a href="https://github.com/zu1k/nali/actions">
-    <img src="https://img.shields.io/github/workflow/status/zu1k/nali/Go?style=flat-square" alt="Github Actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/zu1k/nali/go.yml?branch=master&style=flat-square" alt="Github Actions">
   </a>
   <a href="https://goreportcard.com/report/github.com/zu1k/nali">
     <img src="https://goreportcard.com/badge/github.com/zu1k/nali?style=flat-square">
   </a>
   <a href="https://github.com/zu1k/nali/releases">
     <img src="https://img.shields.io/github/release/zu1k/nali/all.svg?style=flat-square">
+  </a>
+  <a href="https://github.com/zu1k/nali/releases">
+    <img src="https://img.shields.io/github/downloads/zu1k/nali/total?style=flat-square">
   </a>
 </p>
 
@@ -41,7 +44,7 @@
 
 ### 从源码安装
 
-Nali 需要预先安装 Go >= 1.18. 安装后可以从源码安装软件:
+Nali 需要预先安装 Go >= 1.19. 安装后可以从源码安装软件:
 
 ```sh
 $ go install github.com/zu1k/nali@latest
@@ -178,7 +181,7 @@ Address: 2001:428:6402:21b::6 [美国Louisiana州Monroe Qwest Communications Com
 
 ## 用户交互
 
-程序第一次运行后，会在工作目录生成配置文件 `config.yaml` (默认`~/.nali/config.yaml`)，配置文件定义了数据库信息，默认用户无需进行修改
+程序第一次运行后，会在 config 目录生成配置文件 `config.yaml` (使用 `nali info` 来查看具体信息)，配置文件定义了数据库信息，默认用户无需进行修改
 
 数据库格式默认如下：
 
@@ -295,11 +298,13 @@ export NALI_DB_IP4=ipip
 1.1.1.1 [Australia]
 ```
 
-### 更换工作目录
+### 工作目录
 
-如果未指定数据库存放目录，数据库默认将存放在 `~/.nali`
+设置环境变量 `NALI_HOME` 来指定工作目录，配置文件和数据库存放在工作目录下。也可在配置文件中使用绝对路径指定其他数据库路径。
 
-设置环境变量 `NALI_HOME` 来指定工作目录，数据库存放在工作目录下。也可在配置文件中使用绝对路径指定其他数据库路径。
+设置环境变量 `NALI_CONFIG_HOME` 来指定配置文件目录，`NALI_DB_HOME` 来执行数据库文件目录
+
+如果未指定相关环境变量，将使用 XDG 规范，配置文件目录在 `$XDG_CONFIG_HOME/nali`，数据库文件目录在 `$XDG_DATA_HOME/nali`
 
 ```
 set NALI_HOME=D:\nali
@@ -332,9 +337,3 @@ export NALI_HOME=/var/nali
 ## 作者
 
 **Nali** © [zu1k](https://github.com/zu1k), 遵循 [MIT](./LICENSE) 证书.<br>
-
-> Blog [zu1k.com](https://zu1k.com) · GitHub [@zu1k](https://github.com/zu1k) · Twitter [@zu1k_lv](https://twitter.com/zu1k_lv) · Telegram Channel [@peekfun](https://t.me/peekfun)
-
-## Star统计
-
-[![Stargazers over time](https://starchart.cc/zu1k/nali.svg)](https://starchart.cc/zu1k/nali)
